@@ -1,32 +1,55 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     float MoveSpeed;
-
+    [SerializeField]
+    GameObject UIW;
+    [SerializeField]
+    GameObject UIA;
+    [SerializeField]
+    GameObject UIS;
+    [SerializeField]
+    GameObject UID;
+    Text TextW;
+    Text TextA;
+    Text TextS;
+    Text TextD;
     CharacterController Controller;
-    CapsuleCollider Trigger;
-    
 
     bool CanHandOverPost;
     bool CanPickUpPost;
     int TriggeredHouseNo = 0;
-    GameObject Office;
     PostController PostCtrl;
+    KeyCode NewKey = 0;
+    KeyCode[] UnknownKeys = { };
+
+    KeyCode[] Keys = {
+        KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U, KeyCode.I, KeyCode.O, KeyCode.P,
+        KeyCode.A, KeyCode.S, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.J, KeyCode.K, KeyCode.L,
+        KeyCode.Z, KeyCode.X, KeyCode.C, KeyCode.V, KeyCode.B, KeyCode.N, KeyCode.M
+    };
+    KeyCode[] TakenKeys = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D};
+    
     void Start()
     {
-        Trigger = transform.GetComponent<CapsuleCollider>();
         Controller = transform.GetComponent<CharacterController>();
         PostCtrl = transform.GetComponent<PostController>();
+
+        TextW = UIW.GetComponent<Text>();
+        TextA = UIA.GetComponent<Text>();
+        TextS = UIS.GetComponent<Text>();
+        TextD = UID.GetComponent<Text>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        Vector3 moveDirection = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
-        var horizontal = Input.GetAxis("Horizontal");
-        var vertical = Input.GetAxis("Vertical");
+        var vertical = Input.GetKey(TakenKeys[0]) ? 1 : Input.GetKey(TakenKeys[2]) ? -1 : 0;
+        var horizontal = Input.GetKey(TakenKeys[3]) ? 1 : Input.GetKey(TakenKeys[1]) ? -1 : 0;
         float rotation = 0;
         if (horizontal > 0 && vertical > 0)
             rotation = 45;
@@ -45,7 +68,7 @@ public class PlayerController : MonoBehaviour
         else if (horizontal < 0)
             rotation = -90;
 
-        if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        if (vertical != 0 || horizontal != 0)
         {
             transform.eulerAngles = new Vector3(0, rotation, 0);
             Vector3 movement = transform.forward * MoveSpeed / 10;
@@ -58,7 +81,6 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E) && CanPickUpPost)
         {
-            Debug.Log(CanPickUpPost);
             PickUpPost();
         }
 
@@ -66,11 +88,22 @@ public class PlayerController : MonoBehaviour
         {
             PickUpPost();
         }
+
+        if (NewKey != 0)
+        {
+            if (Input.GetKeyDown(NewKey))
+            {
+                NewKey = 0;
+            }
+        }
+
+        RefreshUI();
     }
 
     public void DoDamage()
     {
         Debug.Log(">> Doing damage to player");
+        LooseControl();
     }
 
     private void HandOverPost()
@@ -81,6 +114,38 @@ public class PlayerController : MonoBehaviour
     private void PickUpPost()
     {
         PostCtrl.GetPost();
+    }
+
+    private void LooseControl()
+    {
+        var newKeyIndex = Random.Range(0, Keys.Length - 1);
+        var replacingKeyIndex = Random.Range(0, TakenKeys.Length - 1);
+        
+        NewKey = Keys[newKeyIndex];
+        var replacingKey = TakenKeys[replacingKeyIndex];
+
+        if (NewKey != replacingKey)
+        {
+            TakenKeys[replacingKeyIndex] = NewKey;
+        }
+        else
+        {
+            LooseControl();
+        }
+    }
+
+    private void RefreshUI()
+    {
+        var questionMark = "?";
+        TextW.text = TakenKeys[0] != NewKey ? TakenKeys[0].ToString() : questionMark;
+        TextA.text = TakenKeys[1] != NewKey ? TakenKeys[1].ToString() : questionMark;
+        TextS.text = TakenKeys[2] != NewKey ? TakenKeys[2].ToString() : questionMark;
+        TextD.text = TakenKeys[3] != NewKey ? TakenKeys[3].ToString() : questionMark;
+
+        TextW.color = TextW.text.Equals(questionMark) ? Color.red : Color.black;
+        TextA.color = TextA.text.Equals(questionMark) ? Color.red : Color.black;
+        TextS.color = TextS.text.Equals(questionMark) ? Color.red : Color.black;
+        TextD.color = TextD.text.Equals(questionMark) ? Color.red : Color.black;
     }
 
     private void OnTriggerEnter(Collider other)
