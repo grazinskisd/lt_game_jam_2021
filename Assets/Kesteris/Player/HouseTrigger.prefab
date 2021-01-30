@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3942786264074746811}
   m_Layer: 0
   m_Name: HouseTrigger
-  m_TagString: office
+  m_TagString: house
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
