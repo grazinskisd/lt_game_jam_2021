@@ -4,7 +4,7 @@ using DG.Tweening;
 public class CarManager : MonoBehaviour
 {
     public Transform carPathParent;
-    public GameObject carPrototype;
+    public GameObject[] carPrototypes;
     public float driveDuration;
     public float spawnDelayMin;
     public float spawnDelayMax;
@@ -51,7 +51,7 @@ public class CarManager : MonoBehaviour
 
     private void AddNewCarToParent(Transform carParent)
     {
-        var newCar = Instantiate(carPrototype);
+        var newCar = Instantiate(carPrototypes[Random.Range(0, carPrototypes.Length)]);
         newCar.transform.SetParent(carParent);
         newCar.transform.localPosition = Vector3.zero + Vector3.left * Random.Range(-1f, 1f) * maxCarOffset;
     }
