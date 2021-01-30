@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -7,43 +8,39 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     float MoveSpeed;
-    [SerializeField]
-    GameObject UIW;
-    [SerializeField]
-    GameObject UIA;
-    [SerializeField]
-    GameObject UIS;
-    [SerializeField]
-    GameObject UID;
     Text TextW;
     Text TextA;
     Text TextS;
     Text TextD;
     CharacterController Controller;
+    Animator Animator;
 
     bool CanHandOverPost;
     bool CanPickUpPost;
     int TriggeredHouseNo = 0;
     PostController PostCtrl;
     KeyCode NewKey = 0;
-    KeyCode[] UnknownKeys = { };
 
     KeyCode[] Keys = {
         KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U, KeyCode.I, KeyCode.O, KeyCode.P,
         KeyCode.A, KeyCode.S, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.J, KeyCode.K, KeyCode.L,
         KeyCode.Z, KeyCode.X, KeyCode.C, KeyCode.V, KeyCode.B, KeyCode.N, KeyCode.M
     };
-    KeyCode[] TakenKeys = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D};
-    
+    List<KeyCode> TakenKeys = new List<KeyCode>(new KeyCode[] {KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D});
+
+    private void Awake()
+    {
+        TextW = GameObject.Find("TextW").GetComponent<Text>();
+        TextA = GameObject.Find("TextA").GetComponent<Text>();
+        TextS = GameObject.Find("TextS").GetComponent<Text>();
+        TextD = GameObject.Find("TextD").GetComponent<Text>();
+    }
+
     void Start()
     {
         Controller = transform.GetComponent<CharacterController>();
         PostCtrl = transform.GetComponent<PostController>();
-
-        TextW = UIW.GetComponent<Text>();
-        TextA = UIA.GetComponent<Text>();
-        TextS = UIS.GetComponent<Text>();
-        TextD = UID.GetComponent<Text>();
+        Animator = transform.GetComponent<Animator>();
     }
 
     void Update()
@@ -70,9 +67,14 @@ public class PlayerController : MonoBehaviour
 
         if (vertical != 0 || horizontal != 0)
         {
+            Animator.SetBool("IsRunning", true);
             transform.eulerAngles = new Vector3(0, rotation, 0);
             Vector3 movement = transform.forward * MoveSpeed / 10;
             Controller.Move(movement);
+        }
+        else
+        {
+            Animator.SetBool("IsRunning", false);
         }
 
         if (Input.GetKeyDown(KeyCode.E) && CanHandOverPost)
@@ -119,12 +121,12 @@ public class PlayerController : MonoBehaviour
     private void LooseControl()
     {
         var newKeyIndex = Random.Range(0, Keys.Length - 1);
-        var replacingKeyIndex = Random.Range(0, TakenKeys.Length - 1);
+        var replacingKeyIndex = Random.Range(0, TakenKeys.Count - 1);
         
         NewKey = Keys[newKeyIndex];
         var replacingKey = TakenKeys[replacingKeyIndex];
 
-        if (NewKey != replacingKey)
+        if (NewKey != replacingKey && !TakenKeys.Contains(NewKey))
         {
             TakenKeys[replacingKeyIndex] = NewKey;
         }
