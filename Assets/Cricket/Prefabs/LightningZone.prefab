@@ -249,5 +249,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trigger: {fileID: 7178952840762639908}
   startHeight: 100
-  animationDuration: 1
+  animationDuration: 0.2
   destroyDelay: 0.6

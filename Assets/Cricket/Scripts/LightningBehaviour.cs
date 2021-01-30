@@ -2,20 +2,24 @@
 using DG.Tweening;
 using System.Collections;
 
-public class LightningBehaviour : MonoBehaviour
+public class LightningBehaviour : AttackBehaviour
 {
-    public PlayerTrigger trigger;
     public float startHeight;
     public float animationDuration;
     public float destroyDelay;
 
     void Start()
     {
-        trigger.onPlayerEntered.AddListener(StrikeLightning);
         gameObject.SetActive(false);
     }
 
-    private void StrikeLightning(GameObject player)
+    private IEnumerator DestroyDelayed(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
+    }
+
+    protected override void OnPlayerEntered(PlayerController player)
     {
         gameObject.SetActive(true);
         var startPosition = player.transform.position + transform.up * startHeight;
@@ -25,13 +29,8 @@ public class LightningBehaviour : MonoBehaviour
             .SetEase(Ease.InQuart)
             .OnComplete(() =>
             {
+                player.DoDamage();
                 StartCoroutine(DestroyDelayed(destroyDelay));
             });
-    }
-
-    private IEnumerator DestroyDelayed(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        Destroy(gameObject);
     }
 }
