@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PostController : MonoBehaviour
 {
@@ -101,9 +103,9 @@ public class PostController : MonoBehaviour
 
     private void RefreshUI()
     {
-        TextTimer.text = Timer > 0 ? Timer.ToString() : string.Empty;
+        TextTimer.text = Timer > 0 ? Math.Round(Timer,0).ToString() : string.Empty;
         TextPostCount.text = CurrentPostCount > 0 ? string.Format("{0} / {1}", CurrentPostCount, GotPostCount) : "Time to refill";
-        TextHouseNo.text = TargetHouseNo != 0 ? TargetHouseNo.ToString() : string.Empty;
+        TextHouseNo.text = TargetHouseNo != 0 ? string.Format("No. {0}", TargetHouseNo.ToString()) : string.Empty;
     }
 
     private void GameOver()

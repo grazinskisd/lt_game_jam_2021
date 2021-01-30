@@ -11,10 +11,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float StunDuration;
     float LastStunTime;
-    Text TextW;
-    Text TextA;
-    Text TextS;
-    Text TextD;
+    KeyView TextW;
+    KeyView TextA;
+    KeyView TextS;
+    KeyView TextD;
     CharacterController Controller;
     Animator Animator;
 
@@ -35,10 +35,10 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        TextW = GameObject.Find("TextW").GetComponent<Text>();
-        TextA = GameObject.Find("TextA").GetComponent<Text>();
-        TextS = GameObject.Find("TextS").GetComponent<Text>();
-        TextD = GameObject.Find("TextD").GetComponent<Text>();
+        TextW = GameObject.Find("TextW").GetComponent<KeyView>();
+        TextA = GameObject.Find("TextA").GetComponent<KeyView>();
+        TextS = GameObject.Find("TextS").GetComponent<KeyView>();
+        TextD = GameObject.Find("TextD").GetComponent<KeyView>();
     }
 
     void Start()
@@ -93,11 +93,11 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.E) && CanHandOverPost)
+        if (CanHandOverPost)
         {
             HandOverPost();
         }
-        if (Input.GetKeyDown(KeyCode.E) && CanPickUpPost)
+        if (CanPickUpPost)
         {
             PickUpPost();
         }
@@ -149,7 +149,9 @@ public class PlayerController : MonoBehaviour
             LooseControl();
             return;
         }
-        
+
+        LastModifiedKeyIndex = replacingKeyIndex;
+
         NewKey = Keys[newKeyIndex];
         var replacingKey = TakenKeys[replacingKeyIndex];
 
@@ -166,15 +168,15 @@ public class PlayerController : MonoBehaviour
     private void RefreshUI()
     {
         var questionMark = "?";
-        TextW.text = TakenKeys[0] != NewKey ? TakenKeys[0].ToString() : questionMark;
-        TextA.text = TakenKeys[1] != NewKey ? TakenKeys[1].ToString() : questionMark;
-        TextS.text = TakenKeys[2] != NewKey ? TakenKeys[2].ToString() : questionMark;
-        TextD.text = TakenKeys[3] != NewKey ? TakenKeys[3].ToString() : questionMark;
+        TextW.Text = TakenKeys[0] != NewKey ? TakenKeys[0].ToString() : questionMark;
+        TextA.Text = TakenKeys[1] != NewKey ? TakenKeys[1].ToString() : questionMark;
+        TextS.Text = TakenKeys[2] != NewKey ? TakenKeys[2].ToString() : questionMark;
+        TextD.Text = TakenKeys[3] != NewKey ? TakenKeys[3].ToString() : questionMark;
 
-        TextW.color = TextW.text.Equals(questionMark) ? Color.red : Color.black;
-        TextA.color = TextA.text.Equals(questionMark) ? Color.red : Color.black;
-        TextS.color = TextS.text.Equals(questionMark) ? Color.red : Color.black;
-        TextD.color = TextD.text.Equals(questionMark) ? Color.red : Color.black;
+        TextW.Color = TextW.Text.Equals(questionMark) ? Color.red : Color.black;
+        TextA.Color = TextA.Text.Equals(questionMark) ? Color.red : Color.black;
+        TextS.Color = TextS.Text.Equals(questionMark) ? Color.red : Color.black;
+        TextD.Color = TextD.Text.Equals(questionMark) ? Color.red : Color.black;
     }
 
     private void OnTriggerEnter(Collider other)

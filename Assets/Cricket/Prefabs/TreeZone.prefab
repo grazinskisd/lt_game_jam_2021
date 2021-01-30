@@ -11476,6 +11476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30dab8e537772f4b8826d5cfeb3db4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerEffect: {fileID: 8300000, guid: 248b204be964d41489658c50d6b33afc, type: 3}
   trigger: {fileID: 6659830114415976834}
   apple: {fileID: 8866308979550163461}
   fallDuration: 0.2
