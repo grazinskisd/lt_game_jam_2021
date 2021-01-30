@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public abstract class AttackBehaviour : MonoBehaviour
@@ -7,11 +8,21 @@ public abstract class AttackBehaviour : MonoBehaviour
     public PlayerTrigger trigger;
 
     private AudioManager _audioManager;
+    private bool _wasTriggered;
 
     protected virtual void Awake()
     {
-        trigger.onPlayerEntered.AddListener(OnPlayerEntered);
+        trigger.onPlayerEntered.AddListener(CheckOnPlayerEntered);
         _audioManager = FindObjectOfType<AudioManager>();
+    }
+
+    private void CheckOnPlayerEntered(PlayerController player)
+    {
+        if (!_wasTriggered)
+        {
+            _wasTriggered = true;
+            OnPlayerEntered(player);
+        }
     }
 
     protected virtual void OnPlayerEntered(PlayerController player)
