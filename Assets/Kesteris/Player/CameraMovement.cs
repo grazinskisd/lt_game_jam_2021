@@ -12,12 +12,11 @@ public class CameraMovement : MonoBehaviour
     float MinZ = 0;
     [SerializeField]
     float MaxZ = 0;
-    [SerializeField]
     GameObject Player;
 
-    void Start()
+    private void Awake()
     {
-        
+        Player = GameObject.Find("PostmanV2");
     }
 
     // Update is called once per frame
