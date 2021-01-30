@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public abstract class AttackBehaviour : MonoBehaviour
 {
@@ -11,5 +12,9 @@ public abstract class AttackBehaviour : MonoBehaviour
 
     protected abstract void OnPlayerEntered(PlayerController player);
 
-
+    protected IEnumerator DestroyDelayed(float delay, GameObject go)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(go);
+    }
 }
