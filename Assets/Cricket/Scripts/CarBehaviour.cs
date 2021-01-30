@@ -6,6 +6,7 @@ public class CarBehaviour : AttackBehaviour
 {
     protected override void OnPlayerEntered(PlayerController player)
     {
+        base.OnPlayerEntered(player);
         player.DoDamage();
     }
 }

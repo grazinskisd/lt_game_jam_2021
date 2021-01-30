@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffee21b62515b941ae44c2f8eeba57a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerEffect: {fileID: 0}
+  triggerEffect: {fileID: 8300000, guid: d1bf5b55952fff84492033532f30303a, type: 3}
   trigger: {fileID: 3980472344475361208}
 --- !u!54 &9186454794334623138
 Rigidbody:
