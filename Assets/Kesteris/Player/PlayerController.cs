@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
+    private const string QUESTION_MARK = "?";
     [SerializeField]
     float MoveSpeed;
     [SerializeField]
@@ -167,16 +168,16 @@ public class PlayerController : MonoBehaviour
 
     private void RefreshUI()
     {
-        var questionMark = "?";
-        TextW.Text = TakenKeys[0] != NewKey ? TakenKeys[0].ToString() : questionMark;
-        TextA.Text = TakenKeys[1] != NewKey ? TakenKeys[1].ToString() : questionMark;
-        TextS.Text = TakenKeys[2] != NewKey ? TakenKeys[2].ToString() : questionMark;
-        TextD.Text = TakenKeys[3] != NewKey ? TakenKeys[3].ToString() : questionMark;
+        UpdateKeyView(TextW, 0);
+        UpdateKeyView(TextA, 1);
+        UpdateKeyView(TextS, 2);
+        UpdateKeyView(TextD, 3);
+    }
 
-        TextW.Color = TextW.Text.Equals(questionMark) ? Color.red : Color.black;
-        TextA.Color = TextA.Text.Equals(questionMark) ? Color.red : Color.black;
-        TextS.Color = TextS.Text.Equals(questionMark) ? Color.red : Color.black;
-        TextD.Color = TextD.Text.Equals(questionMark) ? Color.red : Color.black;
+    private void UpdateKeyView(KeyView view, int index)
+    {
+        view.Text = TakenKeys[index] != NewKey ? TakenKeys[index].ToString() : QUESTION_MARK;
+        view.Color = view.Text.Equals(QUESTION_MARK) ? Color.red : Color.black;
     }
 
     private void OnTriggerEnter(Collider other)
