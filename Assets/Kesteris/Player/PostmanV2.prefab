@@ -1101,6 +1101,7 @@ GameObject:
   - component: {fileID: 723579567}
   - component: {fileID: 1798782344}
   - component: {fileID: 1798782345}
+  - component: {fileID: 8291669596375137507}
   m_Layer: 0
   m_Name: PostmanV2
   m_TagString: Player
@@ -1158,6 +1159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 1
   StunDuration: 0.5
+  AudioClips: []
 --- !u!143 &6928213273189457306
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1321,6 +1323,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8291669596375137507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8731745226986988642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df6ea8fdfcd90c446a4cc47ae1baa199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioClips:
+  - {fileID: 8300000, guid: 5c9e0769b96ac8b499c87eb1c68ffc1d, type: 3}
+  - {fileID: 8300000, guid: 8c8698d1be7b9f14f888cca1bfab9986, type: 3}
+  - {fileID: 8300000, guid: a39f8aaa37411da47a7115c45a38125a, type: 3}
+  - {fileID: 8300000, guid: 29f06731cd408694ba62836a95e6b1b1, type: 3}
+  - {fileID: 8300000, guid: d2003a1999200a840a8ef270b85064c1, type: 3}
+  - {fileID: 8300000, guid: 745eec3ca52f1e945aba2e7fab9fc44c, type: 3}
+  - {fileID: 8300000, guid: 456742b77584b4d4c800218156ce5cb2, type: 3}
+  - {fileID: 8300000, guid: 973a55a11caf1c04f8f8266d34c9ff8a, type: 3}
+  - {fileID: 8300000, guid: 853f8c6c3d4808641acccdc93893b26a, type: 3}
 --- !u!1 &8815365158028872419
 GameObject:
   m_ObjectHideFlags: 0

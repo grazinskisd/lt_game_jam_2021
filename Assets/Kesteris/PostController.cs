@@ -24,12 +24,15 @@ public class PostController : MonoBehaviour
     int GotPostCount = 0;
     int TargetHouseNo = 0;
     int Level = 1;
+    AudioSource AudioSource;
     void Start()
     {
         TextTimer = UITimer.GetComponent<Text>();
         TextPostCount = UIPostCount.GetComponent<Text>();
         TextHouseNo = UIHouseNo.GetComponent<Text>();
         IsTimerEnabled = false;
+
+        AudioSource = transform.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -38,14 +41,14 @@ public class PostController : MonoBehaviour
         {
             Timer -= Time.deltaTime;
         }
-        if (Timer <= 0)
+        if (Timer <= 0 && IsTimerEnabled)
         {
             GameOver();
         }
         RefreshUI();
     }
 
-    public void GetPost()
+    public bool GetPost()
     {
         if (CurrentPostCount == 0)
         {
@@ -54,26 +57,33 @@ public class PostController : MonoBehaviour
             GetNewTarget();
             Timer = 100;
             StartTimer();
+            GetComponent<AudioPlayer>().Play("paper2");
+            return true;
         }
+        return false;
     }
 
-    public void HandOverPost(int houseNo)
+    public bool HandOverPost(int houseNo)
     {
         if (houseNo != TargetHouseNo)
         {
-            return;
+            return false;
         }
         if (CurrentPostCount > 0)
         {
             CurrentPostCount -= 1;
             Timer += 10;
             GetNewTarget();
+            GetComponent<AudioPlayer>().Play("throw");
+            GetComponent<AudioPlayer>().Play("paper1");
         }
         if (CurrentPostCount == 0)
         {
             StopTimer();
             StopParticles();
+            GetComponent<AudioPlayer>().Play("bling");
         }
+        return true;
     }
 
     private void StartTimer()
@@ -116,7 +126,7 @@ public class PostController : MonoBehaviour
 
     private void GameOver()
     {
-
+        GetComponent<AudioPlayer>().Play("gameover");
     }
 
     private void StopParticles()

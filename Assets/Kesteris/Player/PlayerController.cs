@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,6 @@ public class PlayerController : MonoBehaviour
     float MoveSpeed;
     [SerializeField]
     float StunDuration;
-    [SerializeField]
     GameObject StunEffect;
     float LastStunTime;
     KeyView TextW;
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     KeyView TextD;
     CharacterController Controller;
     Animator Animator;
+    AudioSource AudioSource;
 
     bool CanHandOverPost;
     bool CanPickUpPost;
@@ -35,6 +36,9 @@ public class PlayerController : MonoBehaviour
         KeyCode.Z, KeyCode.X, KeyCode.C, KeyCode.V, KeyCode.B, KeyCode.N, KeyCode.M
     };
     List<KeyCode> TakenKeys = new List<KeyCode>(new KeyCode[] {KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D});
+
+    [SerializeField]
+    List<AudioClip> AudioClips = new List<AudioClip>();
 
     private void Awake()
     {
@@ -52,6 +56,7 @@ public class PlayerController : MonoBehaviour
         Controller = transform.GetComponent<CharacterController>();
         PostCtrl = transform.GetComponent<PostController>();
         Animator = transform.GetComponent<Animator>();
+        AudioSource = transform.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -95,7 +100,6 @@ public class PlayerController : MonoBehaviour
             if (Time.time - LastStunTime > StunDuration)
             {
                 IsAbleToMove = true;
-                StunEffect.SetActive(false);
             }
         }
 
@@ -124,10 +128,16 @@ public class PlayerController : MonoBehaviour
 
         RefreshUI();
     }
-
+    IEnumerator Stunned()
+    {
+        GetComponent<AudioPlayer>().Play("stun");
+        StunEffect.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        StunEffect.SetActive(false);
+    }
     public void DoDamage()
     {
-        Debug.Log(">> Doing damage to player");
+        StartCoroutine("Stunned");
         LooseControl();
     }
 
@@ -135,12 +145,13 @@ public class PlayerController : MonoBehaviour
     {
         IsAbleToMove = false;
         LastStunTime = Time.time;
-        StunEffect.SetActive(true);
+        
     }
 
     private void HandOverPost()
     {
         PostCtrl.HandOverPost(TriggeredHouseNo);
+        
     }
 
     private void PickUpPost()
