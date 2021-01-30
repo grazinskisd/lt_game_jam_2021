@@ -93,11 +93,11 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.E) && CanHandOverPost)
+        if (CanHandOverPost)
         {
             HandOverPost();
         }
-        if (Input.GetKeyDown(KeyCode.E) && CanPickUpPost)
+        if (CanPickUpPost)
         {
             PickUpPost();
         }
