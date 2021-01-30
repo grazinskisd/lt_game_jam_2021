@@ -9,6 +9,7 @@ public class AngryPersonBehaviour : AttackBehaviour
 
     protected override void OnPlayerEntered(PlayerController player)
     {
+        base.OnPlayerEntered(player);
         transform.DOMove(player.transform.position, travelDuration)
             .OnComplete(() =>
             {

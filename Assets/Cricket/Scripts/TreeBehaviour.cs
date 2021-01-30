@@ -13,6 +13,7 @@ public class TreeBehaviour : AttackBehaviour
     {
         if (!_hasTheAppleFallen)
         {
+            base.OnPlayerEntered(player);
             _hasTheAppleFallen = true;
 
             var startPosition = player.transform.position;

@@ -18,6 +18,7 @@ public class DogBehaviour : AttackBehaviour
 
     protected override void OnPlayerEntered(PlayerController player)
     {
+        base.OnPlayerEntered(player);
         Debug.Log("Bark batk motherfucker!");
         var endValue = player.transform.position;
         endValue.y = _startPosition.y;
