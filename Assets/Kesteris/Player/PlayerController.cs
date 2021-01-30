@@ -4,16 +4,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    CharacterController Controller;
-    [SerializeField]
     float MoveSpeed;
-    // Start is called before the first frame update
+
+    CharacterController Controller;
+    CapsuleCollider Trigger;
+    
+    int PostCount;
+    bool CanHandOverPost;
+    bool CanPickUpPost;
+    GameObject Office;
     void Start()
     {
-        
+        Trigger = transform.GetComponent<CapsuleCollider>();
+        Controller = transform.GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         Vector3 moveDirection = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
@@ -42,6 +47,67 @@ public class PlayerController : MonoBehaviour
             transform.eulerAngles = new Vector3(0, rotation, 0);
             Vector3 movement = transform.forward * MoveSpeed / 10;
             Controller.Move(movement);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && CanHandOverPost)
+        {
+            HandOverPost();
+        }
+        if (Input.GetKeyDown(KeyCode.E) && CanPickUpPost)
+        {
+            PickUpPost();
+        }
+    }
+
+    public void DoDamage()
+    {
+
+    }
+
+    private void HandOverPost()
+    {
+        if (PostCount > 0)
+        {
+            PostCount -= 1;
+            RefreshUI();
+        }
+    }
+
+    private void PickUpPost()
+    {
+        if (PostCount == 0)
+        {
+            var PostCtrl = Office.GetComponent<PostController>();
+            PostCount = PostCtrl.GetPost();
+        }
+    }
+
+    private void RefreshUI()
+    {
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("house"))
+        {
+            CanHandOverPost = true;
+        }
+        if (other.CompareTag("office"))
+        {
+            CanPickUpPost = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("house"))
+        {
+            CanHandOverPost = false;
+        }
+        if (other.CompareTag("office"))
+        {
+            CanPickUpPost = false;
         }
     }
 }
