@@ -4,8 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+public delegate void PostControllerEvent(int number);
+
 public class PostController : MonoBehaviour
 {
+    public event PostControllerEvent OnNextPostBoxDecided;
+    public event PostControllerEvent OnPostHanded;
+
     [SerializeField]
     GameObject UITimer;
     Text TextTimer;
@@ -24,12 +29,15 @@ public class PostController : MonoBehaviour
     int GotPostCount = 0;
     int TargetHouseNo = 0;
     int Level = 1;
+    AudioSource AudioSource;
     void Start()
     {
         TextTimer = UITimer.GetComponent<Text>();
         TextPostCount = UIPostCount.GetComponent<Text>();
         TextHouseNo = UIHouseNo.GetComponent<Text>();
         IsTimerEnabled = false;
+
+        AudioSource = transform.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -38,14 +46,14 @@ public class PostController : MonoBehaviour
         {
             Timer -= Time.deltaTime;
         }
-        if (Timer <= 0)
+        if (Timer <= 0 && IsTimerEnabled)
         {
             GameOver();
         }
         RefreshUI();
     }
 
-    public void GetPost()
+    public bool GetPost()
     {
         if (CurrentPostCount == 0)
         {
@@ -54,26 +62,33 @@ public class PostController : MonoBehaviour
             GetNewTarget();
             Timer = 100;
             StartTimer();
+            GetComponent<AudioPlayer>().Play("paper2");
+            return true;
         }
+        return false;
     }
 
-    public void HandOverPost(int houseNo)
+    public bool HandOverPost(int houseNo)
     {
         if (houseNo != TargetHouseNo)
         {
-            return;
+            return false;
         }
         if (CurrentPostCount > 0)
         {
             CurrentPostCount -= 1;
             Timer += 10;
+            OnPostHanded?.Invoke(TargetHouseNo);
             GetNewTarget();
+            GetComponent<AudioPlayer>().Play("throw");
+            GetComponent<AudioPlayer>().Play("paper1");
         }
         if (CurrentPostCount == 0)
         {
             StopTimer();
-            StopParticles();
+            GetComponent<AudioPlayer>().Play("bling");
         }
+        return true;
     }
 
     private void StartTimer()
@@ -90,21 +105,24 @@ public class PostController : MonoBehaviour
     private void GetNewTarget()
     {
         if (CurrentPostCount == 0)
-        { 
+        {
             TargetHouseNo = 0;
             return;
         }
-        var houseNo = Random.Range(1, 11);
-        if (houseNo != TargetHouseNo)
+
+        TargetHouseNo = GetNextRandomHouse();
+        OnNextPostBoxDecided?.Invoke(TargetHouseNo);
+    }
+
+    private int GetNextRandomHouse()
+    {
+        var houseNo = Random.Range(1, 13);  // 13 beacuse max is exlusive
+        while (houseNo == TargetHouseNo)
         {
-            StopParticles();   
-            TargetHouseNo = houseNo;
-            StartParticles();
+            houseNo = Random.Range(1, 13);
         }
-        else
-        {
-            GetNewTarget();
-        }
+
+        return houseNo;
     }
 
     private void RefreshUI()
@@ -116,19 +134,6 @@ public class PostController : MonoBehaviour
 
     private void GameOver()
     {
-
-    }
-
-    private void StopParticles()
-    {
-        if (TargetHouseNo != 0)
-        {
-            Houses.Find(x => x.name == TargetHouseNo.ToString()).GetComponent<ParticleSystem>().Stop();
-        }
-    }
-
-    private void StartParticles()
-    {
-        Houses.Find(x => x.name == TargetHouseNo.ToString()).GetComponent<ParticleSystem>().Play();
+        GetComponent<AudioPlayer>().Play("gameover");
     }
 }
