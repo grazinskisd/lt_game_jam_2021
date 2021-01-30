@@ -202,8 +202,12 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("house"))
         {
-            CanHandOverPost = true;
-            TriggeredHouseNo = Int16.Parse(other.gameObject.name);
+            var postBox = other.GetComponent<PostBox>();
+            if (postBox != null)
+            {
+                CanHandOverPost = true;
+                TriggeredHouseNo = postBox.number;
+            }
         }
         if (other.CompareTag("office"))
         {

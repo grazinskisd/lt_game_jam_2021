@@ -4,8 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+public delegate void PostControllerEvent(int number);
+
 public class PostController : MonoBehaviour
 {
+    public event PostControllerEvent OnNextPostBoxDecided;
+    public event PostControllerEvent OnPostHanded;
+
     [SerializeField]
     GameObject UITimer;
     Text TextTimer;
@@ -73,6 +78,7 @@ public class PostController : MonoBehaviour
         {
             CurrentPostCount -= 1;
             Timer += 10;
+            OnPostHanded?.Invoke(TargetHouseNo);
             GetNewTarget();
             GetComponent<AudioPlayer>().Play("throw");
             GetComponent<AudioPlayer>().Play("paper1");
@@ -80,7 +86,6 @@ public class PostController : MonoBehaviour
         if (CurrentPostCount == 0)
         {
             StopTimer();
-            StopParticles();
             GetComponent<AudioPlayer>().Play("bling");
         }
         return true;
@@ -100,21 +105,24 @@ public class PostController : MonoBehaviour
     private void GetNewTarget()
     {
         if (CurrentPostCount == 0)
-        { 
+        {
             TargetHouseNo = 0;
             return;
         }
-        var houseNo = Random.Range(1, 11);
-        if (houseNo != TargetHouseNo)
+
+        TargetHouseNo = GetNextRandomHouse();
+        OnNextPostBoxDecided?.Invoke(TargetHouseNo);
+    }
+
+    private int GetNextRandomHouse()
+    {
+        var houseNo = Random.Range(1, 13);  // 13 beacuse max is exlusive
+        while (houseNo == TargetHouseNo)
         {
-            StopParticles();   
-            TargetHouseNo = houseNo;
-            StartParticles();
+            houseNo = Random.Range(1, 13);
         }
-        else
-        {
-            GetNewTarget();
-        }
+
+        return houseNo;
     }
 
     private void RefreshUI()
@@ -127,18 +135,5 @@ public class PostController : MonoBehaviour
     private void GameOver()
     {
         GetComponent<AudioPlayer>().Play("gameover");
-    }
-
-    private void StopParticles()
-    {
-        if (TargetHouseNo != 0)
-        {
-            Houses.Find(x => x.name == TargetHouseNo.ToString()).GetComponent<ParticleSystem>().Stop();
-        }
-    }
-
-    private void StartParticles()
-    {
-        Houses.Find(x => x.name == TargetHouseNo.ToString()).GetComponent<ParticleSystem>().Play();
     }
 }
