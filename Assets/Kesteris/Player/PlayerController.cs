@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     float MoveSpeed;
     [SerializeField]
     float StunDuration;
+    [SerializeField]
+    GameObject StunEffect;
     float LastStunTime;
     KeyView TextW;
     KeyView TextA;
@@ -40,6 +42,9 @@ public class PlayerController : MonoBehaviour
         TextA = GameObject.Find("TextA").GetComponent<KeyView>();
         TextS = GameObject.Find("TextS").GetComponent<KeyView>();
         TextD = GameObject.Find("TextD").GetComponent<KeyView>();
+
+        StunEffect = GameObject.Find("StunEffect");
+        StunEffect.SetActive(false);
     }
 
     void Start()
@@ -90,6 +95,7 @@ public class PlayerController : MonoBehaviour
             if (Time.time - LastStunTime > StunDuration)
             {
                 IsAbleToMove = true;
+                StunEffect.SetActive(false);
             }
         }
 
@@ -129,6 +135,7 @@ public class PlayerController : MonoBehaviour
     {
         IsAbleToMove = false;
         LastStunTime = Time.time;
+        StunEffect.SetActive(true);
     }
 
     private void HandOverPost()
