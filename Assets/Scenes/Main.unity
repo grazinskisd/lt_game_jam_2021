@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 56113b3b655ab7349bab4d7d405c258a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2481,7 +2481,7 @@ Transform:
   - {fileID: 7083716339173869410}
   - {fileID: 159601703}
   m_Father: {fileID: 1796577504}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &349227572
 PrefabInstance:
@@ -15032,10 +15032,10 @@ Transform:
   - {fileID: 1329778096}
   - {fileID: 335802541}
   - {fileID: 1603548787}
+  - {fileID: 341027310}
   - {fileID: 1666965099}
   - {fileID: 901150076}
   - {fileID: 2079024039}
-  - {fileID: 341027310}
   - {fileID: 1393426316}
   - {fileID: 507082240}
   m_Father: {fileID: 0}
