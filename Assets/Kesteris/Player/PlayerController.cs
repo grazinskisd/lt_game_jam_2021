@@ -9,14 +9,16 @@ public class PlayerController : MonoBehaviour
     CharacterController Controller;
     CapsuleCollider Trigger;
     
-    int PostCount;
+
     bool CanHandOverPost;
     bool CanPickUpPost;
     GameObject Office;
+    PostController PostCtrl;
     void Start()
     {
         Trigger = transform.GetComponent<CapsuleCollider>();
         Controller = transform.GetComponent<CharacterController>();
+        PostCtrl = transform.GetComponent<PostController>();
     }
 
     void FixedUpdate()
@@ -55,6 +57,12 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E) && CanPickUpPost)
         {
+            Debug.Log(CanPickUpPost);
+            PickUpPost();
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
             PickUpPost();
         }
     }
@@ -66,20 +74,12 @@ public class PlayerController : MonoBehaviour
 
     private void HandOverPost()
     {
-        if (PostCount > 0)
-        {
-            PostCount -= 1;
-            RefreshUI();
-        }
+        PostCtrl.HandOverPost();
     }
 
     private void PickUpPost()
     {
-        if (PostCount == 0)
-        {
-            var PostCtrl = Office.GetComponent<PostController>();
-            PostCount = PostCtrl.GetPost();
-        }
+        PostCtrl.GetPost();
     }
 
     private void RefreshUI()
