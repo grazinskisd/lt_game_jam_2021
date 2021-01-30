@@ -9,14 +9,17 @@ public class PlayerController : MonoBehaviour
     CharacterController Controller;
     CapsuleCollider Trigger;
     
-    int PostCount;
+
     bool CanHandOverPost;
     bool CanPickUpPost;
+    int TriggeredHouseNo = 0;
     GameObject Office;
+    PostController PostCtrl;
     void Start()
     {
         Trigger = transform.GetComponent<CapsuleCollider>();
         Controller = transform.GetComponent<CharacterController>();
+        PostCtrl = transform.GetComponent<PostController>();
     }
 
     void FixedUpdate()
@@ -55,6 +58,12 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E) && CanPickUpPost)
         {
+            Debug.Log(CanPickUpPost);
+            PickUpPost();
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
             PickUpPost();
         }
     }
@@ -66,25 +75,12 @@ public class PlayerController : MonoBehaviour
 
     private void HandOverPost()
     {
-        if (PostCount > 0)
-        {
-            PostCount -= 1;
-            RefreshUI();
-        }
+        PostCtrl.HandOverPost(TriggeredHouseNo);
     }
 
     private void PickUpPost()
     {
-        if (PostCount == 0)
-        {
-            var PostCtrl = Office.GetComponent<PostController>();
-            PostCount = PostCtrl.GetPost();
-        }
-    }
-
-    private void RefreshUI()
-    {
-
+        PostCtrl.GetPost();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -92,6 +88,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("house"))
         {
             CanHandOverPost = true;
+            TriggeredHouseNo = Int16.Parse(other.gameObject.name);
         }
         if (other.CompareTag("office"))
         {

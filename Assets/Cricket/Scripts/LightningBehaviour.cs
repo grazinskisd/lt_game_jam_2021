@@ -13,12 +13,6 @@ public class LightningBehaviour : AttackBehaviour
         gameObject.SetActive(false);
     }
 
-    private IEnumerator DestroyDelayed(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        Destroy(gameObject);
-    }
-
     protected override void OnPlayerEntered(PlayerController player)
     {
         gameObject.SetActive(true);
@@ -30,7 +24,7 @@ public class LightningBehaviour : AttackBehaviour
             .OnComplete(() =>
             {
                 player.DoDamage();
-                StartCoroutine(DestroyDelayed(destroyDelay));
+                StartCoroutine(DestroyDelayed(destroyDelay, gameObject));
             });
     }
 }
