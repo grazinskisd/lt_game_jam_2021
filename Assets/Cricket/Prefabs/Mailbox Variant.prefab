@@ -48,7 +48,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -284,7 +284,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -746,7 +746,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 2.8
+      value: 4.34
       mode: 0
       spread: 0
       speed:
@@ -4765,8 +4765,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.60476685, y: 0.6860657, z: 1.7511511}
-  m_Center: {x: -0.004135132, y: 0.037506104, z: 0.86557436}
+  m_Size: {x: 1.1828003, y: 1.3463745, z: 1.7511511}
+  m_Center: {x: 0.077545166, y: -0.004135132, z: 0.86557436}
 --- !u!114 &86950193
 MonoBehaviour:
   m_ObjectHideFlags: 0
