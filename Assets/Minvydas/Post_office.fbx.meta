@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Base
+    second: {fileID: 2100000, guid: 6f3b51f9de1497d4e8c25a329b4bf112, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Window
     second: {fileID: 2100000, guid: ae38995f9c363ef48be883fc3df14c87, type: 2}
   materials:
