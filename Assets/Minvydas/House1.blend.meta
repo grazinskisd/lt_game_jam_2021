@@ -1,9 +1,47 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 6cbe4faf227641540a7532aa1f3b0cf6
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blue
+    second: {fileID: 2100000, guid: 6f3b51f9de1497d4e8c25a329b4bf112, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brown
+    second: {fileID: 2100000, guid: d83735d1ab502f54a9cca74b538f6b2e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dark Brown
+    second: {fileID: 2100000, guid: 702ae83384742534d83a9a31f4d11e76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grey
+    second: {fileID: 2100000, guid: fabeaa826200ea2478f5f6c539d47bd3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White
+    second: {fileID: 2100000, guid: 5da00e52a8db0bb439c66e5436f9e5f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window
+    second: {fileID: 2100000, guid: ae38995f9c363ef48be883fc3df14c87, type: 2}
+=======
 guid: 2fe1ca84df9243d4c8623c40e9d4fe76
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
   externalObjects: {}
+>>>>>>> a47292bd4503dce5593500831828f3bffe3f2a8b
   materials:
     materialImportMode: 1
     materialName: 0
