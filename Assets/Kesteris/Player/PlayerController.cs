@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     bool CanHandOverPost;
     bool CanPickUpPost;
+    int TriggeredHouseNo = 0;
     GameObject Office;
     PostController PostCtrl;
     void Start()
@@ -74,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandOverPost()
     {
-        PostCtrl.HandOverPost();
+        PostCtrl.HandOverPost(TriggeredHouseNo);
     }
 
     private void PickUpPost()
@@ -82,16 +83,12 @@ public class PlayerController : MonoBehaviour
         PostCtrl.GetPost();
     }
 
-    private void RefreshUI()
-    {
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("house"))
         {
             CanHandOverPost = true;
+            TriggeredHouseNo = Int16.Parse(other.gameObject.name);
         }
         if (other.CompareTag("office"))
         {

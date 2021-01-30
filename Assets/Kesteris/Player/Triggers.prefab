@@ -54,6 +54,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseTrigger (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3942786264074746788, guid: 8d6e8789687576d468d24ccc5384b87e,
+        type: 3}
+      propertyPath: m_TagString
+      value: house
+      objectReference: {fileID: 0}
     - target: {fileID: 3942786264074746810, guid: 8d6e8789687576d468d24ccc5384b87e,
         type: 3}
       propertyPath: m_RootOrder
@@ -128,6 +133,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HouseTrigger (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942786264074746788, guid: 8d6e8789687576d468d24ccc5384b87e,
+        type: 3}
+      propertyPath: m_TagString
+      value: house
       objectReference: {fileID: 0}
     - target: {fileID: 3942786264074746810, guid: 8d6e8789687576d468d24ccc5384b87e,
         type: 3}
@@ -204,6 +214,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseTrigger (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3942786264074746788, guid: 8d6e8789687576d468d24ccc5384b87e,
+        type: 3}
+      propertyPath: m_TagString
+      value: house
+      objectReference: {fileID: 0}
     - target: {fileID: 3942786264074746810, guid: 8d6e8789687576d468d24ccc5384b87e,
         type: 3}
       propertyPath: m_RootOrder
@@ -278,6 +293,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HouseTrigger (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942786264074746788, guid: 8d6e8789687576d468d24ccc5384b87e,
+        type: 3}
+      propertyPath: m_TagString
+      value: house
       objectReference: {fileID: 0}
     - target: {fileID: 3942786264074746810, guid: 8d6e8789687576d468d24ccc5384b87e,
         type: 3}
@@ -354,6 +374,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseTrigger (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3942786264074746788, guid: 8d6e8789687576d468d24ccc5384b87e,
+        type: 3}
+      propertyPath: m_TagString
+      value: house
+      objectReference: {fileID: 0}
     - target: {fileID: 3942786264074746810, guid: 8d6e8789687576d468d24ccc5384b87e,
         type: 3}
       propertyPath: m_RootOrder
@@ -428,6 +453,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HouseTrigger (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942786264074746788, guid: 8d6e8789687576d468d24ccc5384b87e,
+        type: 3}
+      propertyPath: m_TagString
+      value: house
       objectReference: {fileID: 0}
     - target: {fileID: 3942786264074746810, guid: 8d6e8789687576d468d24ccc5384b87e,
         type: 3}
@@ -529,6 +559,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseTrigger (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3942786264074746788, guid: 8d6e8789687576d468d24ccc5384b87e,
+        type: 3}
+      propertyPath: m_TagString
+      value: house
+      objectReference: {fileID: 0}
     - target: {fileID: 3942786264074746810, guid: 8d6e8789687576d468d24ccc5384b87e,
         type: 3}
       propertyPath: m_RootOrder
@@ -603,6 +638,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HouseTrigger (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942786264074746788, guid: 8d6e8789687576d468d24ccc5384b87e,
+        type: 3}
+      propertyPath: m_TagString
+      value: house
       objectReference: {fileID: 0}
     - target: {fileID: 3942786264074746810, guid: 8d6e8789687576d468d24ccc5384b87e,
         type: 3}
@@ -679,6 +719,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseTrigger (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3942786264074746788, guid: 8d6e8789687576d468d24ccc5384b87e,
+        type: 3}
+      propertyPath: m_TagString
+      value: house
+      objectReference: {fileID: 0}
     - target: {fileID: 3942786264074746810, guid: 8d6e8789687576d468d24ccc5384b87e,
         type: 3}
       propertyPath: m_RootOrder
@@ -753,6 +798,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HouseTrigger (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942786264074746788, guid: 8d6e8789687576d468d24ccc5384b87e,
+        type: 3}
+      propertyPath: m_TagString
+      value: house
       objectReference: {fileID: 0}
     - target: {fileID: 3942786264074746810, guid: 8d6e8789687576d468d24ccc5384b87e,
         type: 3}
@@ -908,6 +958,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HouseTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942786264074746788, guid: 8d6e8789687576d468d24ccc5384b87e,
+        type: 3}
+      propertyPath: m_TagString
+      value: house
       objectReference: {fileID: 0}
     - target: {fileID: 3942786264074746810, guid: 8d6e8789687576d468d24ccc5384b87e,
         type: 3}
