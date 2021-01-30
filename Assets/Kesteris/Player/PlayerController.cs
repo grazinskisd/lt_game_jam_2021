@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     public void DoDamage()
     {
-
+        Debug.Log(">> Doing damage to player");
     }
 
     private void HandOverPost()
