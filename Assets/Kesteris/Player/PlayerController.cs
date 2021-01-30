@@ -20,14 +20,13 @@ public class PlayerController : MonoBehaviour
     Text TextS;
     Text TextD;
     CharacterController Controller;
-    CapsuleCollider Trigger;
 
     bool CanHandOverPost;
     bool CanPickUpPost;
     int TriggeredHouseNo = 0;
-    GameObject Office;
     PostController PostCtrl;
     KeyCode NewKey = 0;
+    KeyCode[] UnknownKeys = { };
 
     KeyCode[] Keys = {
         KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U, KeyCode.I, KeyCode.O, KeyCode.P,
@@ -38,7 +37,6 @@ public class PlayerController : MonoBehaviour
     
     void Start()
     {
-        Trigger = transform.GetComponent<CapsuleCollider>();
         Controller = transform.GetComponent<CharacterController>();
         PostCtrl = transform.GetComponent<PostController>();
 
@@ -50,7 +48,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Vector3 moveDirection = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
         var vertical = Input.GetKey(TakenKeys[0]) ? 1 : Input.GetKey(TakenKeys[2]) ? -1 : 0;
         var horizontal = Input.GetKey(TakenKeys[3]) ? 1 : Input.GetKey(TakenKeys[1]) ? -1 : 0;
         float rotation = 0;
@@ -84,7 +81,6 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E) && CanPickUpPost)
         {
-            Debug.Log(CanPickUpPost);
             PickUpPost();
         }
 
@@ -124,6 +120,7 @@ public class PlayerController : MonoBehaviour
     {
         var newKeyIndex = Random.Range(0, Keys.Length - 1);
         var replacingKeyIndex = Random.Range(0, TakenKeys.Length - 1);
+        
         NewKey = Keys[newKeyIndex];
         var replacingKey = TakenKeys[replacingKeyIndex];
 
