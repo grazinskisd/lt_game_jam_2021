@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,24 +21,24 @@ public class PostController : MonoBehaviour
     [SerializeField]
     GameObject UIHouseNo;
     Text TextHouseNo;
-    [SerializeField]
-    List<GameObject> Houses = new List<GameObject>();
-
+    UIManager UIManager;
     float Timer;
     bool IsTimerEnabled;
     int CurrentPostCount = 0;
     int GotPostCount = 0;
     int TargetHouseNo = 0;
     int Level = 1;
-    AudioSource AudioSource;
+    int Collected = 0;
+    private void Awake()
+    {
+        UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+    }
     void Start()
     {
         TextTimer = UITimer.GetComponent<Text>();
         TextPostCount = UIPostCount.GetComponent<Text>();
         TextHouseNo = UIHouseNo.GetComponent<Text>();
         IsTimerEnabled = false;
-
-        AudioSource = transform.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -60,7 +61,7 @@ public class PostController : MonoBehaviour
             CurrentPostCount = Level;
             GotPostCount = CurrentPostCount;
             GetNewTarget();
-            Timer = 100;
+            Timer = 10;
             StartTimer();
             GetComponent<AudioPlayer>().Play("paper2");
             return true;
@@ -78,6 +79,7 @@ public class PostController : MonoBehaviour
         {
             CurrentPostCount -= 1;
             Timer += 10;
+            Collected++;
             OnPostHanded?.Invoke(TargetHouseNo);
             GetNewTarget();
             GetComponent<AudioPlayer>().Play("throw");
@@ -134,6 +136,14 @@ public class PostController : MonoBehaviour
 
     private void GameOver()
     {
+        StartCoroutine("End");
+        IsTimerEnabled = false;
+    }
+
+    IEnumerator End()
+    {
         GetComponent<AudioPlayer>().Play("gameover");
+        yield return new WaitForSeconds(3f);
+        UIManager.EndGame(Collected);
     }
 }

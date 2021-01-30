@@ -113,11 +113,6 @@ public class PlayerController : MonoBehaviour
             PickUpPost();
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            PickUpPost();
-        }
-
         if (NewKey != 0)
         {
             if (Input.GetKeyDown(NewKey))
