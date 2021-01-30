@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -14,6 +15,8 @@ public class PostController : MonoBehaviour
     [SerializeField]
     GameObject UIHouseNo;
     Text TextHouseNo;
+    [SerializeField]
+    List<GameObject> Houses = new List<GameObject>();
 
     float Timer;
     bool IsTimerEnabled;
@@ -69,6 +72,7 @@ public class PostController : MonoBehaviour
         if (CurrentPostCount == 0)
         {
             StopTimer();
+            StopParticles();
         }
     }
 
@@ -93,7 +97,9 @@ public class PostController : MonoBehaviour
         var houseNo = Random.Range(1, 11);
         if (houseNo != TargetHouseNo)
         {
+            StopParticles();   
             TargetHouseNo = houseNo;
+            StartParticles();
         }
         else
         {
@@ -111,5 +117,18 @@ public class PostController : MonoBehaviour
     private void GameOver()
     {
 
+    }
+
+    private void StopParticles()
+    {
+        if (TargetHouseNo != 0)
+        {
+            Houses.Find(x => x.name == TargetHouseNo.ToString()).GetComponent<ParticleSystem>().Stop();
+        }
+    }
+
+    private void StartParticles()
+    {
+        Houses.Find(x => x.name == TargetHouseNo.ToString()).GetComponent<ParticleSystem>().Play();
     }
 }

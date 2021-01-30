@@ -6,15 +6,16 @@ using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
+    private const string QUESTION_MARK = "?";
     [SerializeField]
     float MoveSpeed;
     [SerializeField]
     float StunDuration;
     float LastStunTime;
-    Text TextW;
-    Text TextA;
-    Text TextS;
-    Text TextD;
+    KeyView TextW;
+    KeyView TextA;
+    KeyView TextS;
+    KeyView TextD;
     CharacterController Controller;
     Animator Animator;
 
@@ -35,10 +36,10 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        TextW = GameObject.Find("TextW").GetComponent<Text>();
-        TextA = GameObject.Find("TextA").GetComponent<Text>();
-        TextS = GameObject.Find("TextS").GetComponent<Text>();
-        TextD = GameObject.Find("TextD").GetComponent<Text>();
+        TextW = GameObject.Find("TextW").GetComponent<KeyView>();
+        TextA = GameObject.Find("TextA").GetComponent<KeyView>();
+        TextS = GameObject.Find("TextS").GetComponent<KeyView>();
+        TextD = GameObject.Find("TextD").GetComponent<KeyView>();
     }
 
     void Start()
@@ -167,16 +168,16 @@ public class PlayerController : MonoBehaviour
 
     private void RefreshUI()
     {
-        var questionMark = "?";
-        TextW.text = TakenKeys[0] != NewKey ? TakenKeys[0].ToString() : questionMark;
-        TextA.text = TakenKeys[1] != NewKey ? TakenKeys[1].ToString() : questionMark;
-        TextS.text = TakenKeys[2] != NewKey ? TakenKeys[2].ToString() : questionMark;
-        TextD.text = TakenKeys[3] != NewKey ? TakenKeys[3].ToString() : questionMark;
+        UpdateKeyView(TextW, 0);
+        UpdateKeyView(TextA, 1);
+        UpdateKeyView(TextS, 2);
+        UpdateKeyView(TextD, 3);
+    }
 
-        TextW.color = TextW.text.Equals(questionMark) ? Color.red : Color.black;
-        TextA.color = TextA.text.Equals(questionMark) ? Color.red : Color.black;
-        TextS.color = TextS.text.Equals(questionMark) ? Color.red : Color.black;
-        TextD.color = TextD.text.Equals(questionMark) ? Color.red : Color.black;
+    private void UpdateKeyView(KeyView view, int index)
+    {
+        view.Text = TakenKeys[index] != NewKey ? TakenKeys[index].ToString() : QUESTION_MARK;
+        view.Color = view.Text.Equals(QUESTION_MARK) ? Color.red : Color.black;
     }
 
     private void OnTriggerEnter(Collider other)
