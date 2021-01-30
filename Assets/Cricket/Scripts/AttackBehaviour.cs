@@ -10,7 +10,10 @@ public abstract class AttackBehaviour : MonoBehaviour
         trigger.onPlayerEntered.AddListener(OnPlayerEntered);
     }
 
-    protected abstract void OnPlayerEntered(PlayerController player);
+    protected virtual void OnPlayerEntered(PlayerController player)
+    {
+        player.Stun();
+    }
 
     protected IEnumerator DestroyDelayed(float delay, GameObject go)
     {

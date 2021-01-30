@@ -7382,6 +7382,11 @@ PrefabInstance:
       propertyPath: UIW
       value: 
       objectReference: {fileID: 1459238633}
+    - target: {fileID: 9072398225157859517, guid: 4f3d2516f24d4ad49a7fbc963eea5bdf,
+        type: 3}
+      propertyPath: StunDuration
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f3d2516f24d4ad49a7fbc963eea5bdf, type: 3}
 --- !u!1001 &606146140

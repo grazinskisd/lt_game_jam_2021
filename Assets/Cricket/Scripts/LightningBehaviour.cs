@@ -15,6 +15,8 @@ public class LightningBehaviour : AttackBehaviour
 
     protected override void OnPlayerEntered(PlayerController player)
     {
+        base.OnPlayerEntered(player);
+
         gameObject.SetActive(true);
         var startPosition = player.transform.position + transform.up * startHeight;
         transform.position = startPosition;

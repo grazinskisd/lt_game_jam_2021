@@ -8,6 +8,8 @@ public class AngryCarBehaviour : AttackBehaviour
 
     protected override void OnPlayerEntered(PlayerController player)
     {
+        base.OnPlayerEntered(player);
+
         var midPoint = player.transform.position;
         midPoint.y = transform.position.y;
 
