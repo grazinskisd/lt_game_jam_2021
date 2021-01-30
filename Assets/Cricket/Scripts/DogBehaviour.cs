@@ -3,6 +3,7 @@ using DG.Tweening;
 
 public class DogBehaviour : MonoBehaviour
 {
+    public PlayerTrigger trigger;
     public float jumpDuration;
     public float jumpPower;
     public float moveSpeed;
@@ -14,6 +15,7 @@ public class DogBehaviour : MonoBehaviour
     private void Awake()
     {
         _startPosition = transform.position;
+        trigger.onPlayerEntered.AddListener(ReactToPlayer);
     }
 
     public void ReactToPlayer(GameObject player)
@@ -22,14 +24,12 @@ public class DogBehaviour : MonoBehaviour
         var endValue = player.transform.position;
         endValue.y = _startPosition.y;
 
-        if(_sequence != null)
-        {
-            _sequence.Kill();
-            _sequence = null;
-        }
-
         _sequence = DOTween.Sequence();
         _sequence.Append(transform.DOJump(endValue, jumpPower, 1, jumpDuration));
         _sequence.Append(transform.DOMove(dogHouse.position, 1 / moveSpeed).SetDelay(1));
+        _sequence.OnComplete(() =>
+        {
+            Destroy(gameObject);
+        });
     }
 }
