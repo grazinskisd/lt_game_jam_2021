@@ -149,7 +149,9 @@ public class PlayerController : MonoBehaviour
             LooseControl();
             return;
         }
-        
+
+        LastModifiedKeyIndex = replacingKeyIndex;
+
         NewKey = Keys[newKeyIndex];
         var replacingKey = TakenKeys[replacingKeyIndex];
 
