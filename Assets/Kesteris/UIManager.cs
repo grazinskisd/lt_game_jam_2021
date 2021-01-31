@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -41,6 +42,11 @@ public class UIManager : MonoBehaviour
         PlayerCamera.SetActive(false);
         CanvasCamera.SetActive(true);
         Score.text = string.Format("Posts collected: {0}", postCount);
+    }
+
+    public void Replay()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }
