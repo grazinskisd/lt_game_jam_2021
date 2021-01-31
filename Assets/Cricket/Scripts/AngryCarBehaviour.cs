@@ -5,6 +5,13 @@ public class AngryCarBehaviour : AttackBehaviour
 {
     public float driveSpeed;
     public Transform garage;
+    private Vector3 _startPosition;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _startPosition = transform.position;
+    }
 
     protected override void OnPlayerEntered(PlayerController player)
     {
@@ -18,11 +25,12 @@ public class AngryCarBehaviour : AttackBehaviour
 
         var sequence = DOTween.Sequence();
         sequence.Append(transform.DOMove(midPoint, 1 / driveSpeed));
-        sequence.Append(transform.DOMove(endPoint, 1 / driveSpeed).SetDelay(1))
-            .OnComplete(() => 
-            {
-                Destroy(gameObject);
-            });
+        sequence.Append(transform.DOMove(endPoint, 1 / driveSpeed).SetDelay(1));
         sequence.SetEase(Ease.InQuad);
+    }
+
+    protected override void ResetState()
+    {
+        transform.position = _startPosition;
     }
 }

@@ -8078,6 +8078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a6bc0f9807c75458078137ff4fca36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  repeatDelay: 1
   triggerEffect: {fileID: 8300000, guid: 248b204be964d41489658c50d6b33afc, type: 3}
   trigger: {fileID: 1603548788}
   travelDuration: 0.4
@@ -28865,6 +28866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81d9f36f993a6248ab2807472846ca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  repeatDelay: 5
   triggerEffect: {fileID: 8300000, guid: cb12d122673be8f4bac0642a41282247, type: 3}
   trigger: {fileID: 71179681}
   jumpDuration: 0.2
@@ -34405,6 +34407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95685a31e900bf942b23f6e523aa2f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  repeatDelay: 0
   triggerEffect: {fileID: 8300000, guid: d1bf5b55952fff84492033532f30303a, type: 3}
   trigger: {fileID: 159601704}
   driveSpeed: 3
@@ -34480,6 +34483,11 @@ PrefabInstance:
         type: 3}
       propertyPath: audioSource
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178952841126093534, guid: 00ed059f802a33e43b4b1c1ae7a9320e,
+        type: 3}
+      propertyPath: repeatDelay
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7178952841126093534, guid: 00ed059f802a33e43b4b1c1ae7a9320e,
         type: 3}
