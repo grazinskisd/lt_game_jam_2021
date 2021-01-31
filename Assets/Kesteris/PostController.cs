@@ -20,6 +20,8 @@ public class PostController : MonoBehaviour
     Text TextPostCount;
     [SerializeField]
     GameObject UIHouseNo;
+    [SerializeField]
+    public float timePerPost;
     Text TextHouseNo;
     UIManager UIManager;
     float Timer;
@@ -61,7 +63,7 @@ public class PostController : MonoBehaviour
             CurrentPostCount = Level;
             GotPostCount = CurrentPostCount;
             GetNewTarget();
-            Timer = 10;
+            Timer += timePerPost * CurrentPostCount;
             StartTimer();
             GetComponent<AudioPlayer>().Play("paper2");
             return true;
@@ -75,12 +77,11 @@ public class PostController : MonoBehaviour
         {
             return false;
         }
+        OnPostHanded?.Invoke(TargetHouseNo);
         if (CurrentPostCount > 0)
         {
             CurrentPostCount -= 1;
-            Timer += 10;
             Collected++;
-            OnPostHanded?.Invoke(TargetHouseNo);
             GetNewTarget();
             GetComponent<AudioPlayer>().Play("throw");
             GetComponent<AudioPlayer>().Play("paper1");

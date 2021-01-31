@@ -4,15 +4,14 @@ using UnityEngine;
 public class MailboxEffectController : MonoBehaviour
 {
     public Transform mailboxParent;
+    public PostController postController;
 
-    private PostController _postController;
     private Dictionary<int, PostBox> _numberToBoxMap;
 
     private void Awake()
     {
-        _postController = FindObjectOfType<PostController>();
-        _postController.OnPostHanded += TurnOffParticles;
-        _postController.OnNextPostBoxDecided += TurnOnParticles;
+        postController.OnPostHanded += TurnOffParticles;
+        postController.OnNextPostBoxDecided += TurnOnParticles;
 
         _numberToBoxMap = new Dictionary<int, PostBox>();
         for (int i = 0; i < mailboxParent.childCount; i++)
@@ -24,11 +23,13 @@ public class MailboxEffectController : MonoBehaviour
 
     private void TurnOnParticles(int number)
     {
+        Debug.Log("Turn on " + number);
         _numberToBoxMap[number].ps.Play();
     }
 
     private void TurnOffParticles(int number)
     {
+        Debug.Log("Turn off " + number);
         _numberToBoxMap[number].ps.Stop();
     }
 }

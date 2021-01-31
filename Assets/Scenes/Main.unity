@@ -10387,6 +10387,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1857853917}
     - target: {fileID: 723579567, guid: 4f3d2516f24d4ad49a7fbc963eea5bdf, type: 3}
+      propertyPath: timePerPost
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 723579567, guid: 4f3d2516f24d4ad49a7fbc963eea5bdf, type: 3}
       propertyPath: Houses.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -16975,7 +16979,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 723579567, guid: 4f3d2516f24d4ad49a7fbc963eea5bdf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4f3d2516f24d4ad49a7fbc963eea5bdf, type: 3}
 --- !u!1001 &1101377919
 PrefabInstance:
@@ -28054,6 +28059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mailboxParent: {fileID: 1787121900}
+  postController: {fileID: 1798782347}
 --- !u!1001 &1789434729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28181,6 +28187,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 599687357}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1798782347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 723579567, guid: 4f3d2516f24d4ad49a7fbc963eea5bdf,
+    type: 3}
+  m_PrefabInstance: {fileID: 599687357}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798782343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175051a2ab2b5624e9ea1398f591e14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1799792253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34015,6 +34033,51 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 889082692083049493, guid: 2b2c75c32c107a343b5dda5ccf969b1a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474367724225858809, guid: 2b2c75c32c107a343b5dda5ccf969b1a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 5.6467934
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474367724225858809, guid: 2b2c75c32c107a343b5dda5ccf969b1a,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -1.8233967
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470550007688751111, guid: 2b2c75c32c107a343b5dda5ccf969b1a,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470550007688751111, guid: 2b2c75c32c107a343b5dda5ccf969b1a,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470550007688751111, guid: 2b2c75c32c107a343b5dda5ccf969b1a,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470550007688751111, guid: 2b2c75c32c107a343b5dda5ccf969b1a,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470550007688751111, guid: 2b2c75c32c107a343b5dda5ccf969b1a,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970230524695810440, guid: 2b2c75c32c107a343b5dda5ccf969b1a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c09270bfcde9aa348805e1e95ff817f1, type: 2}
     - target: {fileID: 7637363968312052190, guid: 2b2c75c32c107a343b5dda5ccf969b1a,
         type: 3}
       propertyPath: m_RootOrder
