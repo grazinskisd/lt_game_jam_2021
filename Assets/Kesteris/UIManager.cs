@@ -8,9 +8,11 @@ public class UIManager : MonoBehaviour
     GameObject EndGameCanvas;
     GameObject PlayerCamera;
     GameObject CanvasCamera;
+    GameObject FadePanel;
     Text Score;
 
     bool IsFading = false;
+    float Alpha = 0;
     private void Awake()
     {
         MainCanvas = GameObject.Find("MainCanvas");
@@ -18,10 +20,10 @@ public class UIManager : MonoBehaviour
         PlayerCamera = GameObject.Find("PlayerCamera");
         CanvasCamera = GameObject.Find("CanvasCamera");
         Score = GameObject.Find("Score").GetComponent<Text>();
+        FadePanel = GameObject.Find("FadePanel");
     }
     void Start()
     {
-        DontDestroyOnLoad(this);
         EndGameCanvas.SetActive(false);
         CanvasCamera.SetActive(false);
     }
@@ -31,7 +33,8 @@ public class UIManager : MonoBehaviour
     {
         if (IsFading)
         {
-
+            Alpha += Time.deltaTime / 4;
+            FadePanel.GetComponent<Image>().color = new Color(0, 0, 0, Alpha);
         }
     }
 
@@ -49,4 +52,18 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void Fade(bool flag)
+    {
+        IsFading = flag;
+    }
+
+    public void TurnOffPanel()
+    {
+        FadePanel.SetActive(false);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

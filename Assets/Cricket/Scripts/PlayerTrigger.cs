@@ -11,7 +11,8 @@ public class PlayerTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            onPlayerEntered.Invoke(other.GetComponent<PlayerController>());
+            if (other.GetComponent<PlayerController>().enabled)
+                onPlayerEntered.Invoke(other.GetComponent<PlayerController>());
         }
     }
 }

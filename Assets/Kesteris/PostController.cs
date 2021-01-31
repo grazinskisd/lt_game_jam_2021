@@ -141,6 +141,7 @@ public class PostController : MonoBehaviour
 
     private void GameOver()
     {
+        transform.GetComponent<PlayerController>().enabled = false;
         StartCoroutine("End");
         IsTimerEnabled = false;
     }
@@ -150,7 +151,9 @@ public class PostController : MonoBehaviour
         GameObject.Find("AudioSource").GetComponent<AudioSource>().Stop();
         GetComponent<PlayerController>().enabled = false;
         GetComponent<AudioPlayer>().Play("gameover");
+        UIManager.Fade(true);
         yield return new WaitForSeconds(4f);
+        UIManager.Fade(false);
         UIManager.EndGame(Collected);
     }
 }
