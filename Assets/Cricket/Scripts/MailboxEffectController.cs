@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MailboxEffectController : MonoBehaviour
 {
@@ -36,13 +37,14 @@ public class MailboxEffectController : MonoBehaviour
 
     private void TurnOnPostBoxParticles(int number)
     {
-        Debug.Log("Turn on " + number);
         _numberToBoxMap[number].ps.Play();
     }
 
     private void TurnOffParticles(int number)
     {
-        Debug.Log("Turn off " + number);
-        _numberToBoxMap[number].ps.Stop();
+        var box = _numberToBoxMap[number];
+        box.ps.Stop();
+        var startScale = box.transform.localScale;
+        box.transform.DOScale(startScale * 1.4f, 0.2f).SetLoops(2, LoopType.Yoyo);
     }
 }
