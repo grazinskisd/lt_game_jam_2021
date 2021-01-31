@@ -134,7 +134,7 @@ public class PostController : MonoBehaviour
 
     private void RefreshUI()
     {
-        TextTimer.text = Timer > 0 ? Math.Round(Timer,0).ToString() : string.Empty;
+        TextTimer.text = Timer > 0 ? Math.Round(Timer,0).ToString() : "Time is up!";
         TextPostCount.text = CurrentPostCount > 0 ? string.Format("{0} / {1}", CurrentPostCount, GotPostCount) : "Time to refill";
         TextHouseNo.text = TargetHouseNo != 0 ? string.Format("No. {0}", TargetHouseNo.ToString()) : string.Empty;
     }
@@ -147,8 +147,10 @@ public class PostController : MonoBehaviour
 
     IEnumerator End()
     {
+        GameObject.Find("AudioSource").GetComponent<AudioSource>().Stop();
+        GetComponent<PlayerController>().enabled = false;
         GetComponent<AudioPlayer>().Play("gameover");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         UIManager.EndGame(Collected);
     }
 }

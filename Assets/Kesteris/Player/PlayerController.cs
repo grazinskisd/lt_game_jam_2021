@@ -37,9 +37,6 @@ public class PlayerController : MonoBehaviour
     };
     List<KeyCode> TakenKeys = new List<KeyCode>(new KeyCode[] {KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D});
 
-    [SerializeField]
-    List<AudioClip> AudioClips = new List<AudioClip>();
-
     private void Awake()
     {
         TextW = GameObject.Find("TextW").GetComponent<KeyView>();
