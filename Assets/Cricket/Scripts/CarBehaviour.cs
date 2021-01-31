@@ -9,4 +9,8 @@ public class CarBehaviour : AttackBehaviour
         base.OnPlayerEntered(player);
         player.DoDamage();
     }
+
+    protected override void ResetState()
+    {
+    }
 }

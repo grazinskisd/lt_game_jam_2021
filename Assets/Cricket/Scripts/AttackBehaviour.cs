@@ -1,17 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public abstract class AttackBehaviour : MonoBehaviour
 {
+    private const float REPEAT_DELAY = 40;
+
     public AudioClip triggerEffect;
     public PlayerTrigger trigger;
 
     private AudioManager _audioManager;
+    private float _timeSinceLastTrigger;
+    private bool _wasTriggered;
 
     protected virtual void Awake()
     {
-        trigger.onPlayerEntered.AddListener(OnPlayerEntered);
+        trigger.onPlayerEntered.AddListener(CheckOnPlayerEntered);
         _audioManager = FindObjectOfType<AudioManager>();
+        _timeSinceLastTrigger = 0;
+    }
+
+    private void CheckOnPlayerEntered(PlayerController player)
+    {
+        if (!_wasTriggered)
+        {
+            _timeSinceLastTrigger = 0;
+            _wasTriggered = true;
+            OnPlayerEntered(player);
+        }
     }
 
     protected virtual void OnPlayerEntered(PlayerController player)
@@ -24,9 +40,24 @@ public abstract class AttackBehaviour : MonoBehaviour
         player.Stun();
     }
 
-    protected IEnumerator DestroyDelayed(float delay, GameObject go)
+    protected IEnumerator DisableDelayed(float delay, GameObject go)
     {
         yield return new WaitForSeconds(delay);
-        Destroy(go);
+        go.SetActive(false);
     }
+
+    private void Update()
+    {
+        if (_wasTriggered)
+        {
+            _timeSinceLastTrigger += Time.deltaTime;
+            if(_timeSinceLastTrigger >= REPEAT_DELAY)
+            {
+                _wasTriggered = false;
+                ResetState();
+            }
+        }
+    }
+
+    protected abstract void ResetState();
 }
