@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class AttackBehaviour : MonoBehaviour
 {
-    private const float REPEAT_DELAY = 20;
+    private const float REPEAT_DELAY = 40;
 
     public AudioClip triggerEffect;
     public PlayerTrigger trigger;
