@@ -33,6 +33,9 @@ public class PostController : MonoBehaviour
     int TargetHouseNo = 0;
     int Level = 1;
     int Collected = 0;
+
+    bool _wasFirstPostPicked;
+
     private void Awake()
     {
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
@@ -61,6 +64,7 @@ public class PostController : MonoBehaviour
 
     public bool GetPost()
     {
+        _wasFirstPostPicked = true;
         if (CurrentPostCount == 0)
         {
             CurrentPostCount = Level;
@@ -134,9 +138,12 @@ public class PostController : MonoBehaviour
 
     private void RefreshUI()
     {
-        TextTimer.text = Timer > 0 ? Math.Round(Timer,0).ToString() : "Time is up!";
+        if (_wasFirstPostPicked)
+        {
+            TextTimer.text = Timer > 0 ? Math.Round(Timer, 0).ToString() : "Time is up!";
+        }
         TextPostCount.text = CurrentPostCount > 0 ? string.Format("{0} / {1}", CurrentPostCount, GotPostCount) : "Time to refill";
-        TextHouseNo.text = TargetHouseNo != 0 ? string.Format("No. {0}", TargetHouseNo.ToString()) : string.Empty;
+        TextHouseNo.text = TargetHouseNo != 0 ? string.Format("House No. {0}", TargetHouseNo.ToString()) : string.Empty;
     }
 
     private void GameOver()
