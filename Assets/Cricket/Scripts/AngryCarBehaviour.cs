@@ -24,8 +24,10 @@ public class AngryCarBehaviour : AttackBehaviour
         endPoint.y = transform.position.y;
 
         var sequence = DOTween.Sequence();
-        sequence.Append(transform.DOMove(midPoint, 1 / driveSpeed));
-        sequence.Append(transform.DOMove(endPoint, 1 / driveSpeed).SetDelay(1));
+        sequence.Append(transform.DOMove(midPoint, 1 / driveSpeed).OnComplete(() => {
+            player.DoDamage();
+        }));
+        sequence.Append(transform.DOMove(endPoint, 2* (1 / driveSpeed)).SetDelay(1));
         sequence.SetEase(Ease.InQuad);
     }
 
