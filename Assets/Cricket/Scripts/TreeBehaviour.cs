@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using System.Collections;
 
 public class TreeBehaviour : AttackBehaviour
 {
@@ -28,8 +29,14 @@ public class TreeBehaviour : AttackBehaviour
             .OnComplete(() =>
             {
                 player.DoDamage();
-                apple.transform.position = _startPosition;
+                StartCoroutine(DelayedMove());
             });
+    }
+
+    private IEnumerator DelayedMove()
+    {
+        yield return new WaitForSeconds(stayDuration);
+        apple.transform.position = _startPosition;
     }
 
     protected override void ResetState()
