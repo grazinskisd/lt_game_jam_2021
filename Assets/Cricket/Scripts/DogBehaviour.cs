@@ -26,9 +26,11 @@ public class DogBehaviour : AttackBehaviour
         _sequence = DOTween.Sequence();
         _sequence.Append(transform.DOJump(endValue, jumpPower, 1, jumpDuration).OnComplete(player.DoDamage));
         _sequence.Append(transform.DOMove(dogHouse.position, 1 / moveSpeed).SetDelay(1));
-        _sequence.OnComplete(() =>
-        {
-            Destroy(gameObject);
-        });
+    }
+
+    protected override void ResetState()
+    {
+        gameObject.SetActive(true);
+        transform.position = _startPosition;
     }
 }

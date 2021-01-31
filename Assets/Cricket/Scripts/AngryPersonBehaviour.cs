@@ -7,6 +7,14 @@ public class AngryPersonBehaviour : AttackBehaviour
 {
     public float travelDuration;
 
+    private Vector3 _startPosition;
+
+    private void Start()
+    {
+        _startPosition = transform.position;
+    }
+
+
     protected override void OnPlayerEntered(PlayerController player)
     {
         base.OnPlayerEntered(player);
@@ -14,7 +22,13 @@ public class AngryPersonBehaviour : AttackBehaviour
             .OnComplete(() =>
             {
                 player.DoDamage();
-                StartCoroutine(DestroyDelayed(1, gameObject));
+                StartCoroutine(DisableDelayed(1, gameObject));
             });
+    }
+
+    protected override void ResetState()
+    {
+        gameObject.SetActive(true);
+        transform.position = _startPosition;
     }
 }

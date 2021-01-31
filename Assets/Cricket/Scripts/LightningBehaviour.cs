@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using DG.Tweening;
-using System.Collections;
 
 public class LightningBehaviour : AttackBehaviour
 {
@@ -8,9 +7,12 @@ public class LightningBehaviour : AttackBehaviour
     public float animationDuration;
     public float destroyDelay;
 
+    private Vector3 _startPosition;
+
     void Start()
     {
         gameObject.SetActive(false);
+        _startPosition = transform.position;
     }
 
     protected override void OnPlayerEntered(PlayerController player)
@@ -26,7 +28,12 @@ public class LightningBehaviour : AttackBehaviour
             .OnComplete(() =>
             {
                 player.DoDamage();
-                StartCoroutine(DestroyDelayed(destroyDelay, gameObject));
+                transform.position = _startPosition;
             });
+    }
+
+    protected override void ResetState()
+    {
+        transform.position = _startPosition;
     }
 }
