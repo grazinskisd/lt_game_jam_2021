@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
@@ -12,6 +10,7 @@ public class PlayerController : MonoBehaviour
     float MoveSpeed;
     [SerializeField]
     float StunDuration;
+    [SerializeField]
     GameObject StunEffect;
     float LastStunTime;
     KeyView TextW;
@@ -44,8 +43,10 @@ public class PlayerController : MonoBehaviour
         TextS = GameObject.Find("TextS").GetComponent<KeyView>();
         TextD = GameObject.Find("TextD").GetComponent<KeyView>();
 
-        StunEffect = GameObject.Find("StunEffect");
-        StunEffect.SetActive(false);
+        if (StunEffect != null)
+        {
+            StunEffect.SetActive(false);
+        }
 
         Application.targetFrameRate = 60;
     }
@@ -131,7 +132,7 @@ public class PlayerController : MonoBehaviour
     }
     public void DoDamage()
     {
-        StartCoroutine("Stunned");
+        StartCoroutine(Stunned());
         LooseControl();
     }
 
