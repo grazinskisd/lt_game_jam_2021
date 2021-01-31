@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c8cab0d8b02d8ce4c8b06a2070d69da8
+guid: 2dc96503e3c7cf647b6d8f19dc115f2a
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Blue
-    second: {fileID: 2100000, guid: 23c58893511895b4abe17047e0b20031, type: 2}
+    second: {fileID: 2100000, guid: 6f3b51f9de1497d4e8c25a329b4bf112, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -23,7 +23,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Grey
-    second: {fileID: 2100000, guid: 78f3fec393e0e66458655988c4e94391, type: 2}
+    second: {fileID: 2100000, guid: fabeaa826200ea2478f5f6c539d47bd3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -34,6 +34,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Window
     second: {fileID: 2100000, guid: ae38995f9c363ef48be883fc3df14c87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wire_frame
+    second: {fileID: 2100000, guid: 2e6286c7a85b0fe448a916b3b670cb34, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
