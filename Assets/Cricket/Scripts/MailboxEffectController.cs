@@ -1,17 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MailboxEffectController : MonoBehaviour
 {
     public Transform mailboxParent;
     public PostController postController;
+    public ParticleSystem postTruckPs;
 
     private Dictionary<int, PostBox> _numberToBoxMap;
 
     private void Awake()
     {
         postController.OnPostHanded += TurnOffParticles;
-        postController.OnNextPostBoxDecided += TurnOnParticles;
+        postController.OnNextPostBoxDecided += TurnOnPostBoxParticles;
+        postController.OnNextPostBoxDecided += (_) => TurnOffPostTruckEffect();
+        postController.OnAllPostDelivered += TurnOnPostTruckEffect;
 
         _numberToBoxMap = new Dictionary<int, PostBox>();
         for (int i = 0; i < mailboxParent.childCount; i++)
@@ -21,7 +25,16 @@ public class MailboxEffectController : MonoBehaviour
         }
     }
 
-    private void TurnOnParticles(int number)
+    private void TurnOnPostTruckEffect()
+    {
+        postTruckPs.Play();
+    }
+    private void TurnOffPostTruckEffect()
+    {
+        postTruckPs.Stop();
+    }
+
+    private void TurnOnPostBoxParticles(int number)
     {
         Debug.Log("Turn on " + number);
         _numberToBoxMap[number].ps.Play();

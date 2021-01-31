@@ -6,11 +6,13 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public delegate void PostControllerEvent(int number);
+public delegate void PostDeliveredEvent();
 
 public class PostController : MonoBehaviour
 {
     public event PostControllerEvent OnNextPostBoxDecided;
     public event PostControllerEvent OnPostHanded;
+    public event PostDeliveredEvent OnAllPostDelivered;
 
     [SerializeField]
     GameObject UITimer;
@@ -41,6 +43,7 @@ public class PostController : MonoBehaviour
         TextPostCount = UIPostCount.GetComponent<Text>();
         TextHouseNo = UIHouseNo.GetComponent<Text>();
         IsTimerEnabled = false;
+        OnAllPostDelivered?.Invoke();
     }
 
     void Update()
@@ -90,6 +93,7 @@ public class PostController : MonoBehaviour
         {
             StopTimer();
             GetComponent<AudioPlayer>().Play("bling");
+            OnAllPostDelivered?.Invoke();
         }
         return true;
     }

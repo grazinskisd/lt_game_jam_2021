@@ -25220,6 +25220,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.08085455, y: 0.002000013, z: 0.020511413}
   m_Center: {x: -0.039427288, y: -0.000000035724995, z: 0.010255721}
+--- !u!198 &1599021592 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6470550007688751111, guid: 2b2c75c32c107a343b5dda5ccf969b1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5983904635313162920}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1602817503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28060,6 +28066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mailboxParent: {fileID: 1787121900}
   postController: {fileID: 1798782347}
+  postTruckPs: {fileID: 1599021592}
 --- !u!1001 &1789434729
 PrefabInstance:
   m_ObjectHideFlags: 0
