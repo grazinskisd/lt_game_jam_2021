@@ -149,7 +149,7 @@ public class PostController : MonoBehaviour
     private void GameOver()
     {
         transform.GetComponent<PlayerController>().enabled = false;
-        StartCoroutine("End");
+        StartCoroutine(End());
         IsTimerEnabled = false;
     }
 
