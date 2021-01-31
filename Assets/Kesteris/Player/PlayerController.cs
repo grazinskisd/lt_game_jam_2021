@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
 
         StunEffect = GameObject.Find("StunEffect");
         StunEffect.SetActive(false);
+
+        Application.targetFrameRate = 60;
     }
 
     void Start()
@@ -84,8 +86,8 @@ public class PlayerController : MonoBehaviour
             {
                 Animator.SetBool("IsRunning", true);
                 transform.eulerAngles = new Vector3(0, rotation, 0);
-                Vector3 movement = transform.forward * MoveSpeed / 10;
-                Controller.Move(movement);
+                Vector3 movement = transform.forward * MoveSpeed;
+                Controller.Move(movement * Time.deltaTime);
             }
             else
             {

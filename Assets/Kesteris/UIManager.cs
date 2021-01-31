@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
         EndGameCanvas.SetActive(true);
         PlayerCamera.SetActive(false);
         CanvasCamera.SetActive(true);
-        Score.text = string.Format("Posts collected: {0}", postCount);
+        Score.text = string.Format("Post delivered: {0}", postCount);
     }
 
     public void Replay()
